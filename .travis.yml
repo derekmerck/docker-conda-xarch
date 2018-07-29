@@ -13,7 +13,8 @@ addons:
       - docker-ce
 
 env:
-  - SERVICE="keras-tf"
+  global:
+    - SERVICE="keras-tf"
 
   matrix:
     - PYTHON_MAJOR="2" ARCH_TAG="amd64"
