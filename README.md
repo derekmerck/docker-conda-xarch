@@ -8,7 +8,7 @@ Derek Merck
 Rhode Island Hospital and Brown University  
 Providence, RI  
 
-Build multi-arch Conda Python Docker images for embedded systems.
+Build multi-arch Conda and Keras-TF Python Docker images for embedded systems.
 
 Conda on Arm
 -------------
@@ -21,12 +21,19 @@ The official arm32 [MiniConda][] is Python 2 from 2015.  These images use [Berry
 [BerryConda]: https://github.com/jjhelmus/berryconda
 [Conda/Constructor]: https://github.com/conda/constructor
 
+The official arm32 tensorflow wheels are avaiable as [nightly build artifacts][tfrpi].  The wheel name for the python3 build has to be manipuated to remove the platform restriction tags.
+
+[tfrpi]: http://ci.tensorflow.org/view/Nightly/
 
 Use It
 ----------------------
 
 ```bash
-$ docker run derekmerck/conda:latest
+$ docker run derekmerck/conda:py2
+$ docker run derekmerck/keras-tf:py2-tf190-k222
+
+$ docker run derekmerck/conda:py3               # Or conda:latest
+$ docker run derekmerck/keras-tf:py3-tf19-k222  # Or keras-tf:latest
 ```
 
 
@@ -44,7 +51,8 @@ This image is based on the `resin/$ARCH-debian:stretch` image.  [Resin.io][] bas
 ### `amd64`
 
 ```bash
-$ docker-compose build conda2-amd64 conda3-amd64
+$ docker-compose build conda-py2-amd64 keras-tf-py2-amd64
+$ docker-compose build conda-py3-amd64 keras-tf-py3-amd64
 ```
 
 Desktop computers/vms, [UP boards][], and the [Intel NUC][] are `amd64` devices.  The appropriate image can be built and pushed from [Travis CI][].
@@ -59,7 +67,8 @@ Desktop computers/vms, [UP boards][], and the [Intel NUC][] are `amd64` devices.
 Most low-power single board computers such as the Raspberry Pi and Beagleboard are `arm32v7` devices.  Cross-compiling the appropriate image takes too long on Travis CI, so it currently has to be tediously cross-compiled and pushed locally.
 
 ```bash
-$ docker-compose build conda2-arm32v7 conda3-arm32v7
+$ docker-compose build conda-py2-arm32v7 keras-tf-py2-arm32v7
+$ docker-compose build conda-py3-arm32v7 keras-tf-py3-arm32v7
 ```
 
 [Raspberry Pi]: https://www.raspberrypi.org

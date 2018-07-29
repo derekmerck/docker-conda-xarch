@@ -6,59 +6,59 @@ services:
   # Conda
   # ---------------------------
 
-  conda2-amd64:
+  conda-py2-amd64:
     build:
       context: .
       args:
         CONDA_PKG: https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-    image: derekmerck/conda2:amd64
+    image: derekmerck/conda:py2-amd64
 
-  conda3-amd64:
+  conda-py3-amd64:
     build:
       context: .
       args:
         CONDA_PKG: https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    image: derekmerck/conda3:amd64
+    image: derekmerck/conda:py3-amd64
 
-  conda2-arm32v7:
+  conda-py2-arm32v7:
     build:
       context: .
       args:
         RESIN_ARCH: raspberrypi3
         CONDA_PKG: https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda2-2.0.0-Linux-armv7l.sh
-    image: derekmerck/conda2:arm32v7
+    image: derekmerck/conda:py2-arm32v7
 
-  conda3-arm32v7:
+  conda-py3-arm32v7:
     build:
       context: .
       args:
         RESIN_ARCH: raspberrypi3
         CONDA_PKG: https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv7l.sh
-    image: derekmerck/conda3:arm32v7
+    image: derekmerck/conda:py3-arm32v7
 
   # ---------------------------
   # Keras+TF
   # ---------------------------
 
-  keras2-amd64:
+  keras-tf-py2-amd64:
     build:
       context: .
       dockerfile: Dockerfile-keras
       args:
         PYTHON_MAJOR: 2
-    image: derekmerck/keras2:amd64
+    image: derekmerck/keras-tf:py2-tf190-k222-amd64
     depends_on:
-      - conda2-amd64
+      - conda-py2-amd64
 
-  keras3-amd64:
+  keras-tf-py3-amd64:
     build:
       context: .
       dockerfile: Dockerfile-keras
-    image: derekmerck/keras3:amd64
+    image: derekmerck/keras-tf:py3-tf190-k222-amd64
     depends_on:
-      - conda3-amd64
+      - conda-py3-amd64
 
-  keras2-arm32v7:
+  keras-tf-py2-arm32v7:
     build:
       context: .
       dockerfile: Dockerfile-keras
@@ -67,11 +67,11 @@ services:
         ARCH: arm32v7
         TF_WHL_URL: http://ci.tensorflow.org/view/Nightly/job/nightly-pi/lastSuccessfulBuild/artifact/output-artifacts/
         TF_WHL_FILE: tensorflow-1.9.0-cp27-none-linux_armv7l.whl
-    image: derekmerck/keras2:arm32v7
+    image: derekmerck/keras-tf:py2-tf190-k222-arm32v7
     depends_on:
-      - conda2-arm32v7
+      - conda-py2-arm32v7
 
-  keras3-arm32v7:
+  keras-tf-py3-arm32v7:
     build:
       context: .
       dockerfile: Dockerfile-keras
@@ -79,15 +79,6 @@ services:
         ARCH: arm32v7
         TF_WHL_URL: http://ci.tensorflow.org/view/Nightly/job/nightly-pi-python3/lastSuccessfulBuild/artifact/output-artifacts/
         TF_WHL_FILE: tensorflow-1.9.0-cp34-none-linux_armv7l.whl
-    image: derekmerck/keras3:arm32v7
+    image: derekmerck/keras-tf:py3-tf190-k222-arm32v7
     depends_on:
-      - conda3-arm32v7
-
-
-  builder-arm32v7:
-    build:
-      context: .
-      dockerfile: conda_pkg/Dockerfile-build
-      args:
-        ARCH: arm32v7
-    image: derekmerck/build3:arm32v7
+      - conda-py3-arm32v7

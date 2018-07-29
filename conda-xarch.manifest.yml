@@ -1,54 +1,54 @@
-- image: "derekmerck/conda2:latest"
+- image: "derekmerck/conda:py2"
 
   manifests:
-    - image: "derekmerck/conda2:amd64"
+    - image: "derekmerck/conda:py2-amd64"
       platform:
         architecture: amd64
         os: linux
 
-    - image: "derekmerck/conda2:arm32v7"
+    - image: "derekmerck/conda:py2-arm32v7"
       platform:
         architecture: arm
         variant: v7
         os: linux
 
-- image: "derekmerck/conda3:latest"
+- image: "derekmerck/conda:latest"
 
   manifests:
-    - image: "derekmerck/conda3:amd64"
+    - image: "derekmerck/conda:py3-amd64"
       platform:
         architecture: amd64
         os: linux
 
-    - image: "derekmerck/conda3:arm32v7"
+    - image: "derekmerck/conda:py3-arm32v7"
       platform:
         architecture: arm
         variant: v7
         os: linux
 
-- image: "derekmerck/keras2:latest"
+- image: "derekmerck/keras-tf:py2"
 
   manifests:
-    - image: "derekmerck/keras2:amd64"
+    - image: "derekmerck/keras:py2-tf190-k222-amd64"
       platform:
         architecture: amd64
         os: linux
 
-    - image: "derekmerck/keras2:arm32v7"
+    - image: "derekmerck/keras-tf:py2-tf190-k222-arm32v7"
       platform:
         architecture: arm
         variant: v7
         os: linux
 
-- image: "derekmerck/keras3:latest"
+- image: "derekmerck/keras-tf:latest"
 
   manifests:
-    - image: "derekmerck/keras3:amd64"
+    - image: "derekmerck/keras-tf:py3-tf190-k222-amd64"
       platform:
         architecture: amd64
         os: linux
 
-    - image: "derekmerck/keras3:arm32v7"
+    - image: "derekmerck/keras-tf:py3-tf190-k222-arm32v7"
       platform:
         architecture: arm
         variant: v7
