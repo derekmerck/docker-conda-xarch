@@ -10,6 +10,7 @@ Providence, RI
 
 Build multi-arch Conda and Keras-TF Python Docker images for embedded systems.
 
+
 Conda on Arm
 -------------
 
@@ -21,9 +22,11 @@ The official arm32 [MiniConda][] is Python 2 from 2015.  These images use [Berry
 [BerryConda]: https://github.com/jjhelmus/berryconda
 [Conda/Constructor]: https://github.com/conda/constructor
 
-The official arm32 tensorflow wheels are avaiable as [nightly build artifacts][tfrpi].  The wheel name for the python3 build has to be manipuated to remove the platform restriction tags.
+The official `arm32` tensorflow wheels are available as [nightly build artifacts][tfrpi].  The wheel name for the python3 build has to be manipuated to remove the platform restriction tags.  NVIDIA provides a recent [tensorflow wheel for their Jetson TXs][tfjetson].
 
 [tfrpi]: http://ci.tensorflow.org/view/Nightly/
+[tfjetson]: https://devtalk.nvidia.com/default/topic/1031300/tensorflow-1-8-wheel-with-jetpack-3-2-/
+
 
 Use It
 ----------------------
@@ -64,7 +67,7 @@ Desktop computers/vms, [UP boards][], and the [Intel NUC][] are `amd64` devices.
 
 ### `arm32v7`
 
-Most low-power single board computers such as the Raspberry Pi and Beagleboard are `arm32v7` devices.  Cross-compiling the appropriate image takes too long on Travis CI, so it currently has to be tediously cross-compiled and pushed locally.
+Most low-power single board computers such as the Raspberry Pi and Beagleboard are `arm32v7` devices.  Appropriate images can be cross-compiled and pushed from Travis CI.
 
 ```bash
 $ docker-compose build conda-py2-arm32v7 keras-tf-py2-arm32v7
@@ -91,7 +94,7 @@ $ cd conda-xarch
 $ docker-compose build conda3-arm64v8
 ```
 
-Although [Resin uses Packet ARM servers to compile arm32 images][resin-on-packet], the ThunderX does not implement the arm32 instruction set, so it [cannot compile natively for the Raspberry Pi][no-arm32].
+Although [Resin uses Packet ARM servers to compile arm32 images][resin-on-packet], the available ThunderX does not implement the arm32 instruction set, so it [cannot compile natively for the Raspberry Pi][no-arm32].
 
 [NVIDIA Jetson TX2]: https://developer.nvidia.com/embedded/buy/jetson-tx2
 [Packet.io]: https://packet.io

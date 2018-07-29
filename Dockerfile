@@ -16,12 +16,16 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 
 ARG CONDA_PKG=https://repo.continuum.io/miniconda/Miniconda2-4.4.10-Linux-x86_64.sh
 
-RUN wget --quiet "$CONDA_PKG" -O ~/conda.sh && \
-    yes | /bin/bash ~/conda.sh -b -f -p /opt/conda && \
-    rm ~/conda.sh && \
-    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "source activate base" >> ~/.bashrc
+# Doesn't exist on BerryConda
+COPY conda.sh /opt/conda/etc/profile.d/conda.sh
+
+RUN wget --quiet "$CONDA_PKG" -O ~/conda.sh \
+    && yes | /bin/bash ~/conda.sh -b -f -p /opt/conda \
+    && rm ~/conda.sh \
+    && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
+    && echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc \
+    && conda create -n base --clone root || echo "Error: Could not create base (already exists in Miniconda?)" \
+    && echo "source activate base" >> ~/.bashrc
 
 # In a new shell
 # Conda is _missing_ from JetsonConda!
