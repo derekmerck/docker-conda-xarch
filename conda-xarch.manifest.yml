@@ -29,7 +29,7 @@
 - image: "derekmerck/keras-tf:py2"
 
   manifests:
-    - image: "derekmerck/keras:py2-tf190-k222-amd64"
+    - image: "derekmerck/keras-tf:py2-tf190-k222-amd64"
       platform:
         architecture: amd64
         os: linux

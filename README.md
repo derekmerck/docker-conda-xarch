@@ -30,10 +30,10 @@ Use It
 
 ```bash
 $ docker run derekmerck/conda:py2
-$ docker run derekmerck/keras-tf:py2-tf190-k222
+$ docker run derekmerck/keras-tf:py2
 
-$ docker run derekmerck/conda:py3               # Or conda:latest
-$ docker run derekmerck/keras-tf:py3-tf19-k222  # Or keras-tf:latest
+$ docker run derekmerck/conda:latest
+$ docker run derekmerck/keras-tf:latest
 ```
 
 
