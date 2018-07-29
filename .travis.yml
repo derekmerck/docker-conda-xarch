@@ -28,6 +28,9 @@ before_install:
 
   - pip3 install pyyaml  # for manifest-it
 
+    # Register qemu as cross-compiler
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
 install:
 
   # Build image
