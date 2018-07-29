@@ -14,7 +14,8 @@ addons:
 
 env:
   global:
-    - SERVICE="keras-tf"
+    - SERVICE0="conda"
+    - SERVICE1="keras-tf"
 
   matrix:
     - PYTHON_MAJOR="2" ARCH_TAG="amd64"
@@ -36,7 +37,7 @@ before_install:
 install:
 
   # Build image
-  - docker-compose build $SERVICE-py$PYTHON_MAJOR-$ARCH_TAG
+  - docker-compose build $SERVICE0-py$PYTHON_MAJOR-$ARCH_TAG $SERVICE1-py$PYTHON_MAJOR-$ARCH_TAG
 
 script: true
 

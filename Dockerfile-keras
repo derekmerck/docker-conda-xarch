@@ -4,7 +4,7 @@
 ARG PYTHON_MAJOR=3
 ARG ARCH="amd64"
 
-FROM derekmerck/conda${PYTHON_MAJOR}:${ARCH}
+FROM derekmerck/conda:py${PYTHON_MAJOR}-${ARCH}
 MAINTAINER Derek Merck <derek_merck@brown.edu>
 
 ARG PYTHON_MAJOR=3
