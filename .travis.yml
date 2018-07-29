@@ -36,6 +36,8 @@ install:
   # Build image
   - docker-compose build $SERVICE-$ARCH_TAG $SERVICE2-$ARCH_TAG
 
+script: true
+
 after_success:
 
   # Login to docker for push
