@@ -15,14 +15,10 @@ addons:
 env:
 
   matrix:
-    - SERVICE="conda2" ARCH_TAG="amd64"
-    - SERVICE="conda3" ARCH_TAG="amd64"
-    - SERVICE="keras2" ARCH_TAG="amd64"
-    - SERVICE="keras3" ARCH_TAG="amd64"
-    - SERVICE="conda2" ARCH_TAG="arm32v7"
-    - SERVICE="conda3" ARCH_TAG="arm32v7"
-    - SERVICE="keras2" ARCH_TAG="arm32v7"
-    - SERVICE="keras3" ARCH_TAG="arm32v7"
+    - SERVICE="conda2" SERVICE2="keras2" ARCH_TAG="amd64"
+    - SERVICE="conda3" SERVICE2="keras3" ARCH_TAG="amd64"
+    - SERVICE="conda2" SERVICE2="keras2" ARCH_TAG="arm32v7"
+    - SERVICE="conda3" SERVICE2="keras3" ARCH_TAG="arm32v7"
 
 before_install:
 
@@ -35,7 +31,7 @@ before_install:
 install:
 
   # Build image
-  - docker-compose build $SERVICE-$ARCH_TAG
+  - docker-compose build $SERVICE-$ARCH_TAG $SERVICE2-$ARCH_TAG
 
 after_success:
 
