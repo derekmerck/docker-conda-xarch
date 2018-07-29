@@ -1,0 +1,55 @@
+- image: "derekmerck/conda2:latest"
+
+  manifests:
+    - image: "derekmerck/conda2:amd64"
+      platform:
+        architecture: amd64
+        os: linux
+
+    - image: "derekmerck/conda2:arm32v7"
+      platform:
+        architecture: arm
+        variant: v7
+        os: linux
+
+- image: "derekmerck/conda3:latest"
+
+  manifests:
+    - image: "derekmerck/conda3:amd64"
+      platform:
+        architecture: amd64
+        os: linux
+
+    - image: "derekmerck/conda3:arm32v7"
+      platform:
+        architecture: arm
+        variant: v7
+        os: linux
+
+- image: "derekmerck/keras2:latest"
+
+  manifests:
+    - image: "derekmerck/keras2:amd64"
+      platform:
+        architecture: amd64
+        os: linux
+
+    - image: "derekmerck/keras2:arm32v7"
+      platform:
+        architecture: arm
+        variant: v7
+        os: linux
+
+- image: "derekmerck/keras3:latest"
+
+  manifests:
+    - image: "derekmerck/keras3:amd64"
+      platform:
+        architecture: amd64
+        os: linux
+
+    - image: "derekmerck/keras3:arm32v7"
+      platform:
+        architecture: arm
+        variant: v7
+        os: linux

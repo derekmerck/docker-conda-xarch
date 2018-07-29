@@ -1,0 +1,47 @@
+dist: trusty
+language: python
+group: edge
+
+python:
+  - "3.6"
+services:
+  - docker
+
+addons:
+  apt:
+    packages:
+      - docker-ce
+
+env:
+
+  matrix:
+    - SERVICE="conda2" ARCH_TAG="amd64"
+    - SERVICE="conda3" ARCH_TAG="amd64"
+    - SERVICE="keras2" ARCH_TAG="amd64"
+    - SERVICE="keras3" ARCH_TAG="amd64"
+    - SERVICE="conda2" ARCH_TAG="arm32v7"
+    - SERVICE="conda3" ARCH_TAG="arm32v7"
+    - SERVICE="keras2" ARCH_TAG="arm32v7"
+    - SERVICE="keras3" ARCH_TAG="arm32v7"
+
+before_install:
+
+  # Put docker into "experimental" for manifest function
+  - mkdir -p $HOME/.docker
+  - echo '{"experimental":"enabled"}' > "$HOME/.docker/config.json"
+
+  - pip3 install pyyaml  # for manifest-it
+
+install:
+
+  # Build image
+  - docker-compose build $SERVICE-$ARCH_TAG
+
+after_success:
+
+  # Login to docker for push
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+  # manifest and push
+  - python3 manifest-it.py conda-xarch.manifest.yml
+
