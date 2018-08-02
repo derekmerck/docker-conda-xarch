@@ -1,0 +1,13 @@
+name: JetsonConda
+version: 0.2.2
+
+channels:
+  - https://anaconda.org/aarch64_gbox
+
+conda_default_channels:
+  - https://anaconda.org/aarch64_gbox
+
+specs:
+  - python 3.6*
+  - conda
+  - pip
