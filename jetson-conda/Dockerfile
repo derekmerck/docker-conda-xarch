@@ -9,6 +9,12 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
         bzip2 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN conda install libconda
+
+#RUN pip install git+git://github.com/ericdill/constructor.git@blacklist-noarch-python
+#RUN sed -i "s#create(info, verbose=verbose)#create(info)#" /opt/conda/lib/python3.6/site-packages/constructor/main.py
+#RUN wget -o /opt/conda/lib/python3.6/site-packages/constructor/header.sh https://raw.githubusercontent.com/ericdill/constructor/blacklist-noarch-python/constructor/header.sh
+
 RUN conda install constructor
 COPY construct.yaml /opt/build/construct.yaml
 RUN constructor --platform=linux-aarch64 /opt/build

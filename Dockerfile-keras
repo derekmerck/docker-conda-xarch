@@ -13,14 +13,14 @@ ARG TF_WHL_FILE=tensorflow-1.9.0rc0-cp34-cp34m-linux_x86_64.whl
 
 RUN apt-get update && apt-get install -yq --no-install-recommends \
         build-essential \
+        python3-openssl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN conda install -y numpy scipy h5py pyyaml pillow
-RUN pip install parameterized pydicom ruamel.yaml pydot
-
-# Remove compatabity tags, we know what we are doing...
-RUN curl -o tensorflow-1.9-py"${PYTHON_MAJOR}"-none-any.whl ${TF_WHL_URL}${TF_WHL_FILE} \
-    && pip install tensorflow-1.9-py"${PYTHON_MAJOR}"-none-any.whl \
+RUN echo "source activate base" >> ~/.bashrc \
+    && conda install -y numpy scipy hdf5 pyyaml pillow pyopenssl \
+    && pip install --no-deps parameterized pydicom ruamel.yaml pydot \
+    && curl -o tensorflow-1.9-py"${PYTHON_MAJOR}"-none-any.whl ${TF_WHL_URL}${TF_WHL_FILE} \
+    && pip install --no-deps --no-cache-dir -vvvv tensorflow-1.9-py"${PYTHON_MAJOR}"-none-any.whl \
     && rm tensorflow-1.9-py"${PYTHON_MAJOR}"-none-any.whl
 
 ENV KERAS_BACKEND=tensorflow

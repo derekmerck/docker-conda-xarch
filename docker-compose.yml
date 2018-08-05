@@ -41,7 +41,7 @@ services:
       context: .
       args:
         RESIN_ARCH: jetson-tx2
-        CONDA_PKG: https://www.dropbox.com/s/w4y892wek46wj0t/JetsonConda-0.2.1-Linux-aarch64.sh
+        CONDA_PKG: https://www.dropbox.com/s/pi5h6xyaucymyv5/JetsonConda-0.2.4-Linux-aarch64.sh
     image: derekmerck/conda:py3-arm64v8
 
   # ---------------------------

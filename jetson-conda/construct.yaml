@@ -1,11 +1,12 @@
 name: JetsonConda
-version: 0.2.2
+version: 0.2.4
 
 channels:
-  - https://anaconda.org/aarch64_gbox
+  - https://conda.anaconda.org/jetson-tx2/
 
 conda_default_channels:
-  - https://anaconda.org/aarch64_gbox
+  - https://conda.anaconda.org/jetson-tx2/linux-aarch64/
+#  - https://conda.anaconda.org/aarch64_gbox/
 
 specs:
   - python 3.6*

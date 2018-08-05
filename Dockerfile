@@ -25,11 +25,13 @@ RUN wget --quiet "$CONDA_PKG" -O ~/conda.sh \
     && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
     && echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
 
-RUN conda update -y conda || echo "Error: Failed to update conda (check path?)"
-RUN pip install --upgrade pip
-
-RUN conda create -n base --clone root || echo "Error: Could not create base (already exists in Miniconda?)" \
-    && echo "source activate base" >> ~/.bashrc
+RUN conda config --append channels jetson-tx2 \
+    && conda config --append channels aarch64_gbox \
+    && conda update -y conda || echo "Error: Failed to update conda (check path?)" \
+    && pip install --upgrade pip \
+    && conda create -n base --clone root || echo "Error: Could not create base (already exists in Miniconda?)" \
+    && echo "source activate base" >> ~/.bashrc \
+    && pip install --upgrade pip
 
 ENV TZ=America/New_York
 # Disable resin.io's systemd init system
