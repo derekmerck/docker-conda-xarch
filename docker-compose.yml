@@ -73,8 +73,6 @@ services:
       args:
         PYTHON_MAJOR: 2
         ARCH: arm32v7
-        TF_WHL_URL: http://ci.tensorflow.org/view/Nightly/job/nightly-pi/lastSuccessfulBuild/artifact/output-artifacts/
-        TF_WHL_FILE: tensorflow-1.9.0-cp27-none-linux_armv7l.whl
     image: derekmerck/conda:py2-tf190-k222-arm32v7
     depends_on:
       - conda-py2-arm32v7
@@ -85,8 +83,6 @@ services:
       dockerfile: Dockerfile-keras
       args:
         ARCH: arm32v7
-        TF_WHL_URL: http://ci.tensorflow.org/view/Nightly/job/nightly-pi-python3/lastSuccessfulBuild/artifact/output-artifacts/
-        TF_WHL_FILE: tensorflow-1.9.0-cp34-none-linux_armv7l.whl
     image: derekmerck/conda:py3-tf190-k222-arm32v7
     depends_on:
       - conda-py3-arm32v7

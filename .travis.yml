@@ -20,9 +20,9 @@ env:
   matrix:
     - PYTHON_MAJOR="2" ARCH_TAG="amd64"
     - PYTHON_MAJOR="3" ARCH_TAG="amd64"
-    - PYTHON_MAJOR="2" ARCH_TAG="arm32v7"
-    - PYTHON_MAJOR="3" ARCH_TAG="arm32v7"
-    - PYTHON_MAJOR="3" ARCH_TAG="arm64v8"
+#    - PYTHON_MAJOR="2" ARCH_TAG="arm32v7"
+#    - PYTHON_MAJOR="3" ARCH_TAG="arm32v7"
+#    - PYTHON_MAJOR="3" ARCH_TAG="arm64v8"
 
 before_install:
 

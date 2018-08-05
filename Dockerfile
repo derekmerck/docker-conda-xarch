@@ -10,7 +10,7 @@ MAINTAINER Derek Merck <derek_merck@brown.edu>
 ENV PATH /opt/conda/bin:$PATH
 
 RUN apt-get update && apt-get install -yq --no-install-recommends \
-        wget \
+        curl \
         bzip2 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
