@@ -54,7 +54,7 @@ services:
       dockerfile: Dockerfile-keras
       args:
         PYTHON_MAJOR: 2
-    image: derekmerck/keras-tf:py2-tf190-k222-amd64
+    image: derekmerck/conda:py2-tf190-k222-amd64
     depends_on:
       - conda-py2-amd64
 
@@ -62,7 +62,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-keras
-    image: derekmerck/keras-tf:py3-tf190-k222-amd64
+    image: derekmerck/conda:py3-tf190-k222-amd64
     depends_on:
       - conda-py3-amd64
 
@@ -75,7 +75,7 @@ services:
         ARCH: arm32v7
         TF_WHL_URL: http://ci.tensorflow.org/view/Nightly/job/nightly-pi/lastSuccessfulBuild/artifact/output-artifacts/
         TF_WHL_FILE: tensorflow-1.9.0-cp27-none-linux_armv7l.whl
-    image: derekmerck/keras-tf:py2-tf190-k222-arm32v7
+    image: derekmerck/conda:py2-tf190-k222-arm32v7
     depends_on:
       - conda-py2-arm32v7
 
@@ -87,7 +87,7 @@ services:
         ARCH: arm32v7
         TF_WHL_URL: http://ci.tensorflow.org/view/Nightly/job/nightly-pi-python3/lastSuccessfulBuild/artifact/output-artifacts/
         TF_WHL_FILE: tensorflow-1.9.0-cp34-none-linux_armv7l.whl
-    image: derekmerck/keras-tf:py3-tf190-k222-arm32v7
+    image: derekmerck/conda:py3-tf190-k222-arm32v7
     depends_on:
       - conda-py3-arm32v7
 
@@ -99,7 +99,7 @@ services:
         ARCH: arm64v8
         TF_WHL_URL: https://www.dropbox.com/s/pmijwdx0iv5mcv2/
         TF_WHL_FILE: tensorflow-1.9.0rc0-cp35-cp35m-linux_aarch64.whl
-    image: derekmerck/keras-tf:py3-tf190-k222-arm64v8
+    image: derekmerck/conda:py3-tf190-k222-arm64v8
     depends_on:
       - conda-py3-arm32v7
 

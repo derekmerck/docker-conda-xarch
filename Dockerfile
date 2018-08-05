@@ -19,9 +19,9 @@ ARG CONDA_PKG=https://repo.continuum.io/miniconda/Miniconda2-4.4.10-Linux-x86_64
 # Doesn't exist on BerryConda
 COPY conda.sh /opt/conda/etc/profile.d/conda.sh
 
-RUN wget --quiet "$CONDA_PKG" -O ~/conda.sh \
-    && yes | /bin/bash ~/conda.sh -b -f -p /opt/conda \
-    && rm ~/conda.sh \
+RUN curl -L -o /tmp/conda.sh "$CONDA_PKG" \
+    && yes | /bin/bash /tmp/conda.sh -b -f -p /opt/conda \
+    && rm /tmp/conda.sh \
     && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh \
     && echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
 
