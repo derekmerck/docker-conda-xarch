@@ -4,32 +4,32 @@
 ARG PYTHON_MAJOR=3
 ARG ARCH="amd64"
 
-FROM derekmerck/conda:py${PYTHON_MAJOR}-${ARCH}
+FROM conda-py${PYTHON_MAJOR}-${ARCH}
 MAINTAINER Derek Merck <derek_merck@brown.edu>
 
 RUN apt-get update && apt-get install -yq --no-install-recommends \
-        build-essential \
-        gfortran \
-        libatlas-base-dev \
-        libopenblas-dev \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    build-essential \
+    gfortran \
+    libatlas-base-dev \
+    libopenblas-dev \
+  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV KERAS_BACKEND=tensorflow
 
 RUN conda install -y \
-        numpy \
-        scipy \
-        hdf5 \
-        pyyaml \
-        pillow \
-        pyopenssl \
-    && pip install --no-deps \
-        parameterized \
-        pydicom \
-        ruamel.yaml \
-        pydot \
-        tensorflow \
-        keras
+    numpy \
+    scipy \
+    hdf5 \
+    pyyaml \
+    pillow \
+    pyopenssl \
+   && pip install --no-deps \
+    parameterized \
+    pydicom \
+    ruamel.yaml \
+    pydot \
+    tensorflow \
+    keras
 
 #    && curl -L -o tensorflow-1.9-py"${PYTHON_MAJOR}"-none-any.whl ${TF_WHL_URL}${TF_WHL_FILE} \
 #    && pip install --no-deps tensorflow-1.9-py"${PYTHON_MAJOR}"-none-any.whl \

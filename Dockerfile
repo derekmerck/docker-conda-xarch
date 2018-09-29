@@ -1,7 +1,16 @@
 # xArch Conda Image
 # Derek Merck, Summer 2018
 
-ARG RESIN_ARCH="intel-nuc"
+ARG DOCKER_ARCH="amd64"
+# ARG DOCKER_ARCH="arm32v7"
+# ARG DOCKER_ARCH="arm64v8"
+
+LABEL maintainer="Derek Merck"
+LABEL email="derek_merck@brown.edu"
+LABEL description="X-Arch Conda"
+LABEL vendor="Rhode Island Hospital"
+LABEL architecture="$DOCKER_ARCH"
+LABEL os="linux"
 
 FROM resin/${RESIN_ARCH}-debian:stretch
 MAINTAINER Derek Merck <derek_merck@brown.edu>
@@ -9,10 +18,11 @@ MAINTAINER Derek Merck <derek_merck@brown.edu>
 #ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
-RUN apt-get update && apt-get install -yq --no-install-recommends \
-        curl \
-        bzip2 \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt -y clean && apt -y update && apt -y upgrade
+RUN DEBIAN_FRONTEND=noninteractive apt -y install --no-install-recommends \
+    curl \
+    bzip2 \
+  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ARG CONDA_PKG=https://repo.continuum.io/miniconda/Miniconda2-4.4.10-Linux-x86_64.sh
 
@@ -33,8 +43,9 @@ RUN conda config --append channels jetson-tx2 \
     && echo "source activate base" >> ~/.bashrc \
     && pip install --upgrade pip
 
+# Leave entrypoint alone for resin-init
+CMD ["tail", "-f", "/dev/null"]
+
 ENV TZ=America/New_York
 # Disable resin.io's systemd init system
 ENV INITSYSTEM off
-
-CMD tail -f /dev/null

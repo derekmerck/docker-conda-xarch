@@ -3,7 +3,68 @@ version: '3'
 services:
 
   # ---------------------------
-  # Conda
+  # Conda py3
+  # ---------------------------
+
+  conda-py3-amd64:
+    build:
+      context: .
+      args:
+        CONDA_PKG: https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    image: conda-py3-amd64
+
+  conda-py3-arm32v7:
+    build:
+      context: .
+      args:
+        RESIN_ARCH: arm7hf
+        DOCKER_ARCH: arm32v7
+        CONDA_PKG: https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv7l.sh
+    image: conda-py3-arm32v7
+
+  conda-py3-arm64v8:
+    build:
+      context: .
+      args:
+        RESIN_ARCH: aarch64
+        DOCKER_ARCH: arm64v8
+        CONDA_PKG: https://www.dropbox.com/s/pi5h6xyaucymyv5/JetsonConda-0.2.4-Linux-aarch64.sh
+    image: conda-py3-arm64v8
+
+
+  # ---------------------------
+  # Conda py3
+  #  - TF
+  #  - Keras
+  # ---------------------------
+
+  keras-py3k-amd64:
+    build:
+      context: .
+      dockerfile: Dockerfile-keras
+    image: conda-py3-tfk-amd64
+
+  keras-py3k-arm32v7:
+    build:
+      context: .
+      dockerfile: Dockerfile-keras
+      args:
+        DOCKER_ARCH: arm32v7
+    image: conda-py3k-arm32v7
+
+  keras-tf-py3-arm64v8:
+    build:
+      context: .
+      dockerfile: Dockerfile-keras
+      args:
+        DOCKER_ARCH: arm64v8
+        TF_WHL_URL: https://www.dropbox.com/s/pmijwdx0iv5mcv2/
+        TF_WHL_FILE: tensorflow-1.9.0rc0-cp35-cp35m-linux_aarch64.whl
+    image: conda-py3k-arm64v8
+
+
+  # ---------------------------
+  # Conda py2
   # ---------------------------
 
   conda-py2-amd64:
@@ -11,91 +72,37 @@ services:
       context: .
       args:
         CONDA_PKG: https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-    image: derekmerck/conda:py2-amd64
-
-  conda-py3-amd64:
-    build:
-      context: .
-      args:
-        CONDA_PKG: https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    image: derekmerck/conda:py3-amd64
+    image: conda-py2-amd64
 
   conda-py2-arm32v7:
     build:
       context: .
       args:
-        RESIN_ARCH: raspberrypi3
+        RESIN_ARCH: arm7hf
+        DOCKER_ARCH: arm32v7
         CONDA_PKG: https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda2-2.0.0-Linux-armv7l.sh
-    image: derekmerck/conda:py2-arm32v7
+    image: conda-py2-arm32v7
 
-  conda-py3-arm32v7:
-    build:
-      context: .
-      args:
-        RESIN_ARCH: raspberrypi3
-        CONDA_PKG: https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv7l.sh
-    image: derekmerck/conda:py3-arm32v7
-
-  conda-py3-arm64v8:
-    build:
-      context: .
-      args:
-        RESIN_ARCH: jetson-tx2
-        CONDA_PKG: https://www.dropbox.com/s/pi5h6xyaucymyv5/JetsonConda-0.2.4-Linux-aarch64.sh
-    image: derekmerck/conda:py3-arm64v8
 
   # ---------------------------
-  # Keras+TF
+  # Conda py2
+  #  - TF
+  #  - Keras
   # ---------------------------
 
-  keras-tf-py2-amd64:
+  keras-py2k-amd64:
     build:
       context: .
       dockerfile: Dockerfile-keras
       args:
         PYTHON_MAJOR: 2
-    image: derekmerck/conda:py2-tf190-k222-amd64
-    depends_on:
-      - conda-py2-amd64
+    image: conda-py2k-amd64
 
-  keras-tf-py3-amd64:
-    build:
-      context: .
-      dockerfile: Dockerfile-keras
-    image: derekmerck/conda:py3-tf190-k222-amd64
-    depends_on:
-      - conda-py3-amd64
-
-  keras-tf-py2-arm32v7:
+  keras-py2k-arm32v7:
     build:
       context: .
       dockerfile: Dockerfile-keras
       args:
         PYTHON_MAJOR: 2
-        ARCH: arm32v7
-    image: derekmerck/conda:py2-tf190-k222-arm32v7
-    depends_on:
-      - conda-py2-arm32v7
-
-  keras-tf-py3-arm32v7:
-    build:
-      context: .
-      dockerfile: Dockerfile-keras
-      args:
-        ARCH: arm32v7
-    image: derekmerck/conda:py3-tf190-k222-arm32v7
-    depends_on:
-      - conda-py3-arm32v7
-
-  keras-tf-py3-arm64v8:
-    build:
-      context: .
-      dockerfile: Dockerfile-keras
-      args:
-        ARCH: arm64v8
-        TF_WHL_URL: https://www.dropbox.com/s/pmijwdx0iv5mcv2/
-        TF_WHL_FILE: tensorflow-1.9.0rc0-cp35-cp35m-linux_aarch64.whl
-    image: derekmerck/conda:py3-tf190-k222-arm64v8
-    depends_on:
-      - conda-py3-arm32v7
-
+        DOCKER_ARCH: arm32v7
+    image: conda-py2k-arm32v7
