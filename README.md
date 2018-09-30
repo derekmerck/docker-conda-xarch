@@ -8,13 +8,13 @@ Derek Merck
 Rhode Island Hospital and Brown University  
 Providence, RI  
 
-Build multi-arch Conda and Keras-TF Python Docker images for embedded systems.
+Build multi-arch Conda and Keras/TensofFlow Python Docker images for embedded systems.
 
 
 Conda on Arm
 -------------
 
-The official arm32 [MiniConda][] is Python 2 from 2015.  These images use [BerryConda][] compiled by jjhelmus.  He also explains how to build a JetsonConda in the [Conda/Constructor][] repo.*
+The official `arm32v7` [MiniConda][] is Python 2 from 2015.  These images use [BerryConda][] compiled by jjhelmus.  He also explains how to build a JetsonConda in the [Conda/Constructor][] repo.*
 
 > \*Need tdd `libconda` to the package manifest.
 
@@ -22,7 +22,7 @@ The official arm32 [MiniConda][] is Python 2 from 2015.  These images use [Berry
 [BerryConda]: https://github.com/jjhelmus/berryconda
 [Conda/Constructor]: https://github.com/conda/constructor
 
-The official `arm32` tensorflow wheels are available as [nightly build artifacts][tfrpi].  The wheel name for the python3 build has to be manipuated to remove the platform restriction tags.  NVIDIA provides a recent [tensorflow wheel for their Jetson TXs][tfjetson].
+The official `arm32v7` tensorflow wheels are available as [nightly build artifacts][tfrpi].  The wheel name for the python3 build has to be manipuated to remove the platform restriction tags.  NVIDIA provides a recent [tensorflow wheel for their Jetson TXs][tfjetson].
 
 [tfrpi]: http://ci.tensorflow.org/view/Nightly/
 [tfjetson]: https://devtalk.nvidia.com/default/topic/1031300/tensorflow-1-8-wheel-with-jetpack-3-2-/
@@ -32,11 +32,11 @@ Use It
 ----------------------
 
 ```bash
-$ docker run derekmerck/conda:py2
-$ docker run derekmerck/keras-tf:py2
+$ docker run derekmerck/conda-py2
+$ docker run derekmerck/conda-py2k
 
-$ docker run derekmerck/conda:latest
-$ docker run derekmerck/keras-tf:latest
+$ docker run derekmerck/conda-py3
+$ docker run derekmerck/keras-py3k
 ```
 
 
@@ -54,8 +54,8 @@ This image is based on the `resin/$ARCH-debian:stretch` image.  [Resin.io][] bas
 ### `amd64`
 
 ```bash
-$ docker-compose build conda-py2-amd64 keras-tf-py2-amd64
-$ docker-compose build conda-py3-amd64 keras-tf-py3-amd64
+$ docker-compose build conda-py2-amd64 conda-py2k-amd64
+$ docker-compose build conda-py3-amd64 conda-py3k-amd64
 ```
 
 Desktop computers/vms, [UP boards][], and the [Intel NUC][] are `amd64` devices.  The appropriate image can be built and pushed from [Travis CI][].
